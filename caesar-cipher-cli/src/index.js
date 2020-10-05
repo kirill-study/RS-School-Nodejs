@@ -6,19 +6,19 @@ const through2 = require('through2')
 const { pipeline } = require('stream')
 const fs = require('fs')
 
-let inputStream
-let outputStream
+let readStream
+let writeStream
 
 parse()
 
-if (program.input === 'undefined') inputStream = fs.createReadStream(process.stdin, "utf8")
+if (program.input === undefined) readStream = process.stdin
 else readStream = fs.createReadStream(program.input, "utf8")
 
-if (program.output === 'undefined') outputStream = fs.createWriteStream(process.stdout)
+if (program.output === undefined) writeStream = process.stdout
 else writeStream = fs.createWriteStream(program.output, {flags: 'a'})
 
-const theFunction = through2((data, enc, cb) => {
+const caesarPipe = through2((data, enc, cb) => {
   cb(null, Buffer.from(caesar(data.toString())))
 })
 
-readStream.pipe(theFunction).pipe(writeStream)
+readStream.pipe(caesarPipe).pipe(writeStream)
