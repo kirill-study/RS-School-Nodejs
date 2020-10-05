@@ -21,19 +21,19 @@ exports.parse = function parse() {
         process.exit(1)
     }
     if (program.input !== undefined) {
-        fs.access(program.input, err => {
-            if (err) {
-                console.error('Input file either does not exist, or can\'t be read')
-                process.exit(1)
-            }
-        })
+        try {
+            fs.accessSync(program.input)
+        } catch (err) {
+            console.error('Input file either does not exist, or can\'t be read')
+            process.exit(1)
+        }
     }
     if (program.output !== undefined) {
-        fs.access(program.output, err => {
-            if (err) {
-                console.error('Output file either does not exist, or can\'t be read')
-                process.exit(1)
-            }
-        })
+        try {
+            fs.accessSync(program.output)
+        } catch (err) {
+            console.error('Output file either does not exist, or can\'t be read')
+            process.exit(1)
+        }
     }
 }
