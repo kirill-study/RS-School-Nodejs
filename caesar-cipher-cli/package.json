@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/kirillpogo-study/RS-School-Nodejs/tree/master/caesar-cipher-cli#readme",
   "dependencies": {
-    "commander": "^6.1.0"
+    "commander": "^6.1.0",
+    "through2": "^4.0.2"
   }
 }
